@@ -2,7 +2,17 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import styled from "@emotion/styled"
 
+const Container = styled.div`
+
+`;
+const Main = styled.main`
+
+`;
+const BlogTitle = styled.h1`
+
+`;
 const title: string = 'Nextjs + TypeScript';
 
 const Home: NextPage = () => {
