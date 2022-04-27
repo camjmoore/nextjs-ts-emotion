@@ -21,11 +21,30 @@ const BlogTitle = styled.h1`
   line-height: 1.15;
   font-size: 4rem;
 `;
+const List = styled.ul`
+  list-style: square;
+`;
+const ListItem = styled.li`
+  padding: 10px;
+  text-transform: capitalize;
+  margin: 40px 0;
+  cursor: pointer;
+  color: #252525;
+  &:hover {
+    background: #f0f0f0;
+  }
+`;
+
+const PostTitle = styled.h2`
+  margin: 0;
+  font-size: 24px;
+`;
+
 const title: string = 'Nextjs + TypeScript';
 
-const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log({ posts });
-  
+const Home = ( props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { posts } = props
+
   return (
     <Container>
       <Head>
@@ -36,6 +55,13 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
       <Main>
         <BlogTitle>{title}</BlogTitle>
+        <List>
+          {posts.map((post) => (
+            <ListItem key={post.id}>
+              <PostTitle>{post.title}</PostTitle>
+            </ListItem>
+          ))}
+        </List>
       </Main>
     </Container>
   )
