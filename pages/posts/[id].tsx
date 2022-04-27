@@ -1,12 +1,12 @@
-import { GetStaticPropsContext } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { Article } from '@components/Article';
 import type { Post } from '../index'
 
-export default function Post() {
+export default function BlogPost({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Article>
-      <h1>Title</h1>
-      <p>From East to West and back again, accord to the azimuth such that you may return to the horizon of your first season; Eternal Spring</p>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
     </Article>
   );
 }
@@ -14,7 +14,7 @@ export default function Post() {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
 
-  const emptyPost = {
+  const emptyPost: Post = {
     title: "Post Not Found",
     body: "",
     id: 0,
@@ -31,7 +31,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
   
-  const post: Post[] = await res.json();
+  const post: Post = await res.json();
 
   return {
     props: {
