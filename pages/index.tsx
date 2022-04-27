@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
@@ -23,7 +23,9 @@ const BlogTitle = styled.h1`
 `;
 const title: string = 'Nextjs + TypeScript';
 
-const Home: NextPage = () => {
+const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log({ posts });
+  
   return (
     <Container>
       <Head>
@@ -38,5 +40,23 @@ const Home: NextPage = () => {
     </Container>
   )
 }
-
 export default Home
+
+type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+export const getStaticProps = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+  
+  const posts: Post[] = await res.json();
+  console.log(posts)
+  return {
+    props: {
+      posts,
+    },
+  }
+}
