@@ -7,7 +7,6 @@ import styled from "@emotion/styled"
 const Container = styled.div`
   padding: 0 2rem;
 `;
-
 const Main = styled.main`
   min-height: 100vh;
   padding: 4rem 0;
