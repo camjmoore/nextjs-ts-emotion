@@ -1,4 +1,4 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { Article } from '@components/Article';
 import type { Post } from '../index'
 
@@ -11,10 +11,24 @@ export default function BlogPost({ post }: InferGetStaticPropsType<typeof getSta
   );
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts: Post[] = await res.json();
+
+  const paths = posts.map((post) => ({
+    params: {id: post.id.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
 
-  const emptyPost: Post = {
+  const emptyPost: Post = { 
     title: "Post Not Found",
     body: "",
     id: 0,
