@@ -1,4 +1,4 @@
-import { GetStaticPathsContext, GetStaticPropsContext } from 'next';
+import { GetStaticPropsContext } from 'next';
 import { Article } from '@components/Article';
 import type { Post } from '../index'
 
@@ -11,9 +11,24 @@ export default function Post() {
   );
 }
 
-export const getStaticProps = async (context: GetStaticPathsContext) => {
-
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
+
+  const emptyPost = {
+    title: "Post Not Found",
+    body: "",
+    id: 0,
+    userId: 0,
+  };
+
+  if (!params?.id) {
+    return {
+      props: {
+        post: emptyPost,
+      },
+    };
+  }
+
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
   
   const post: Post[] = await res.json();
