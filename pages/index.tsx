@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
+import { FeedbackForm } from '@components/FeedbackForm'
 import styled from '@emotion/styled'
 
 const Container = styled.div`
@@ -69,6 +70,7 @@ const Home = ( props: InferGetStaticPropsType<typeof getStaticProps>) => {
           ))}
         </List>
       </Main>
+      <FeedbackForm/>
     </Container>
   )
 }
