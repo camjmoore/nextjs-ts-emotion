@@ -61,8 +61,8 @@ const Home = ( props: InferGetStaticPropsType<typeof getStaticProps>) => {
         </Link>
         <List>
           {posts.map((post) => (
-            <Link href={`/posts/${post.id}`} passHref>
-              <ListItem key={post.id}>
+            <Link key={post.id} href={`/posts/${post.id}`} passHref>
+              <ListItem>
                 <PostTitle>{post.title}</PostTitle>
               </ListItem>
             </Link>
