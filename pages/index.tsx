@@ -56,7 +56,7 @@ const Home = ( props: InferGetStaticPropsType<typeof getStaticProps>) => {
 
       <Main>
         <BlogTitle>{title}</BlogTitle>
-        <Link href="/about">
+        <Link href="/about" passHref>
           <a>About this Blog</a>
         </Link>
         <List>
