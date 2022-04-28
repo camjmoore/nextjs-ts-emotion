@@ -1,7 +1,9 @@
 import type { InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
 import Head from 'next/head'
 import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
+import { FeedbackForm } from '@components/FeedbackForm'
 import styled from '@emotion/styled'
 
 const Container = styled.div`
@@ -55,14 +57,20 @@ const Home = ( props: InferGetStaticPropsType<typeof getStaticProps>) => {
 
       <Main>
         <BlogTitle>{title}</BlogTitle>
+        <Link href="/about" passHref>
+          <a>About this Blog</a>
+        </Link>
         <List>
           {posts.map((post) => (
-            <ListItem key={post.id}>
-              <PostTitle>{post.title}</PostTitle>
-            </ListItem>
+            <Link key={post.id} href={`/posts/${post.id}`} passHref>
+              <ListItem>
+                <PostTitle>{post.title}</PostTitle>
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Main>
+      <FeedbackForm/>
     </Container>
   )
 }
