@@ -1,4 +1,4 @@
-export const FeedbackForm = () => {
+function FeedbackForm() {
   return (
     <form name="feedback" method="post" data-netlify="true">
       <input type="hidden" name="fom-name" value="feedback"/>
@@ -22,3 +22,5 @@ export const FeedbackForm = () => {
     </form>
   )
 }
+
+export { FeedbackForm };
